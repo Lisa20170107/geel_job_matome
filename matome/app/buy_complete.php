@@ -52,6 +52,9 @@ if(!isset($_GET['buy_check_complete'])){
          <p>配送方法:<?php echo ex_typenum($type);?></p>
          <p>購入が完了しました。</a>
          <br>
-       <?php }echo return_top();?><br>
+       <?php
+       //カート内の情報を破棄する。
+       unset($_SESSION['selects']);
+      }echo return_top();?><br>
    </body>
  </html>
