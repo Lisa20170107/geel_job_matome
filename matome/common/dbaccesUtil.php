@@ -4,7 +4,7 @@
 //DBへの接続を行う。成功ならPDOオブジェクトを、失敗なら中断、メッセージの表示を行う
 function connect2MySQL(){
     try{
-        $pdo = new PDO('mysql:host=localhost;dbname=kagoyume_db;charset=utf8','rt20180510','****');
+        $pdo = new PDO('mysql:host=localhost;dbname=kagoyume_db;charset=utf8','rt20180510','＊＊＊＊＊');
         //SQL実行時のエラーをtry-catchで取得できるように設定
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $pdo;
@@ -116,7 +116,8 @@ function update_item_profile($sum,$UserID){
   //db接続を確立
   $update_db = connect2MySQL();
   //DBに全項目のある1レコードを登録するSQL
-  $update_sql = "UPDATE user_t SET total = total+:sum WHERE UserID = :UserID";
+  //totalが最初nullだった場合、0に置き換えてから加算する（nullに加算してもnullのまま
+  $update_sql = "UPDATE user_t SET total = coalesce(total,0)+:sum WHERE UserID = :UserID";
 
   //クエリとして用意
   $update_query = $update_db->prepare($update_sql);
@@ -129,6 +130,7 @@ function update_item_profile($sum,$UserID){
   //SQLを実行
   try{
       $update_query->execute();
+
   } catch (PDOException $e) {
       //接続オブジェクトを初期化することでDB接続を切断
       $update_db=null;

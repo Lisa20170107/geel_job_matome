@@ -4,7 +4,7 @@
 
 
 //取得したアプリケーションIDを設定（Yahoo!ショッピングWeb API
-$appid = "********";
+$appid = "＊＊＊＊";
 
 
 //トップへ戻る
@@ -14,8 +14,20 @@ $appid = "********";
 
 //loginページへいく
    function return_login(){
-       return "<a href='".LOGIN."'>ログイン/ログアウト</a>";
+     if(!isset($_SESSION['name'])){
+       return "<a href='".LOGIN."'>ログイン</a>";
+       }
+       if(isset($_SESSION['name'])){
+         return "<a href='".LOGIN."'>ログアウト</a>";
+       }
    }
+
+   //もしログインしていたら、挨拶を表示する
+      function login_hello(){
+        if(isset($_SESSION['name'])){
+          return "ようこそ"."<a href='".MY_DATA."'>" . $_SESSION['name'] ."</a>"."さん";
+        }
+      }
 
 
   //フォームの再入力時に、すでにセッションに対応した値があるときはその値を返却する
