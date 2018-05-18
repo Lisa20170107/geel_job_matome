@@ -50,8 +50,10 @@ if(!isset($_SESSION['name'])){
         <li>商品名:<?php echo h($hit_2->Name);?><br></li>
         <li>発送方法:<?php echo ex_typenum($hit['type']);?><br></li>
         <li>購入日時:<?php echo $hit['buyDate'];?><br></li>
+        <li>金額:<?php echo h($hit_2->Price);?>円<br></li>
         </div>
         </ul>
+        <p>総購入金額:<?php echo $_SESSION['mydata_total'];?>円</p>
         <?php }}}else{
             echo 'データの挿入に失敗しました。次記のエラーにより処理を中断します:'.$result; }?>
      <?php  echo return_top();?>

@@ -6,6 +6,7 @@ require_once("../common/scriptUtil.php");
 //もし$_GET["keyword"]の値が空の場合は表示しない。
 $keyword = !empty($_GET["keyword"]) ? $_GET["keyword"] : "";
 
+session_start();
  ?>
 
 <!DOCTYPE html>
@@ -37,7 +38,7 @@ $keyword = !empty($_GET["keyword"]) ? $_GET["keyword"] : "";
 
      です。<br>
     </p>
-
+    <p><?php echo login_hello(); ?></p>
     <h2>商品検索</h2>
     <p>
       <form action="<?php echo SEARCH ?>" method="GET">
@@ -47,7 +48,7 @@ $keyword = !empty($_GET["keyword"]) ? $_GET["keyword"] : "";
       </form>
       <br><br>
     </p>
-    <a href="<?php echo REGISTRATION; ?>">登録</a>
+    <a href="<?php echo REGISTRATION; ?>">新規登録</a>
     <?php  echo return_login();?>
     <a href="<?php echo MY_DATA; ?>">会員情報</a>
     <a href="<?php echo CART; ?>">カートの中身を確認する</a>

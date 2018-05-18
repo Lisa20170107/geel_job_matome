@@ -49,6 +49,7 @@ $_SESSION['selects'] = $products;
      <meta http-equiv="content-type" charset="utf-8">
    </head>
    <body>
+     <p><?php echo login_hello(); ?></p>
      <!--繰り返し文で値を取り出す。10件のみ表示させる-->
      <?php
      foreach ($hits as $hit) {

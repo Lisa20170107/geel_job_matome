@@ -65,6 +65,7 @@ else {
         <input type="submit" name='login' value="ログイン">
       </form>
     <?php }?>
+    <a href="<?php echo REGISTRATION; ?>">新規登録</a>
     <?php echo return_top();?>
     </body>
  </html>

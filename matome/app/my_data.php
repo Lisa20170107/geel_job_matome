@@ -40,6 +40,9 @@ if(!isset($_SESSION['name'])){
         パスワード:<?php echo $hit['password'];?><br>
         メールアドレス:<?php echo $hit['mail'];?><br>
         住所:<?php echo $hit['address'];?><br>
+        <!--セッションに総購入金額を記録させる-->
+        <?php $_SESSION['mydata_total']=$hit['total'];?>
+        総購入金額:<?php echo $hit['total'];?><br>
         <?php
         }}else{
             echo 'データの挿入に失敗しました。次記のエラーにより処理を中断します:'.$result;

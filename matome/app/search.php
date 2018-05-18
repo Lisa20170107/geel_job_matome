@@ -2,11 +2,21 @@
 require_once("../common/defineUtil.php");
 require_once("../common/scriptUtil.php");
 
+session_start();
+
 //検索結果を配列にする
 $hits = array();
 
 //受け取った値を変数にする
 $query = $_GET["keyword"];
+
+//検索が未入力だった場合、トップページへ誘導する
+if(empty($query)){
+  echo "キーワードが未入力です。トップページから検索し直してください。".'<br>';
+  echo return_top();
+  exit;
+}
+
 //foreach文用の変数
 $i = 0;
 
@@ -30,6 +40,7 @@ if ($query != "") {
     <meta http-equiv="content-type" charset="utf-8">
   </head>
   <body>
+    <p><?php echo login_hello(); ?></p>
     <!--繰り返し文で値を取り出す。10件のみ表示させる-->
     <?php
     foreach ($hits as $hit) {
@@ -56,5 +67,6 @@ if ($query != "") {
     </div>
     <?php } ?>
     <?php  echo return_login();?>
+    <?php echo return_top();?>
   </body>
 </html>

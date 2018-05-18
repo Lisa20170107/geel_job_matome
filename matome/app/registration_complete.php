@@ -32,8 +32,17 @@
         メールアドレス:<?php echo $mail;?><br>
         住所:<?php echo $address;?><br><br>
         以上の内容で登録しました。<br>
+        <!--UserIDをセッションに記録させる（購入ページで使用するため）-->
         <?php
-        }else{
+        //フォームの値をlogin_profiles();に渡し、レコードを検索する。フォームの値と一致したレコードを配列で取得する。
+        $result = login_profiles($name,$password);
+        //配列の中の名前の値を繰り返し文で取り出す
+        foreach($result as $value){
+        //注文記録用
+          $_SESSION['user_id'] =$value['UserID'];
+        ?>
+        <?php
+      }}else{
             echo 'データの挿入に失敗しました。次記のエラーにより処理を中断します:'.$result;
         }
     }

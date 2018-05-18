@@ -2,9 +2,7 @@
 require_once("../common/defineUtil.php");
 require_once("../common/scriptUtil.php");
 require_once("../common/dbaccesUtil.php");
-
 session_start();
-
 //もしbuy_confirm.phpからのアクセスでなければログインページへ
 if(!isset($_GET['buy_check_complete'])){
   header("Location: top.php");
@@ -31,7 +29,6 @@ if(!isset($_GET['buy_check_complete'])){
      $UserID=$_SESSION['user_id'];
      $type=$_GET['how_buy'];
      $price=$hit['price'];
-
      //データのDB挿入処理。エラーの場合のみエラー文がセットされる。成功すればnull
      $result = insert_item($UserID, $itemcode, $type);
      //エラーが発生しなければ表示を行う
@@ -53,8 +50,6 @@ if(!isset($_GET['buy_check_complete'])){
          if(!isset($result2)){?>
          <p>合計金額:<?php echo $sum;?>円</p>
          <p>配送方法:<?php echo ex_typenum($type);?></p>
-         <!-- 合計金額を更新-->
-         <?php update_item_profile($sum,$UserID); ?>
          <p>購入が完了しました。</a>
          <br>
        <?php }echo return_top();?><br>
