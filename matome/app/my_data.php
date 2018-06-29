@@ -16,10 +16,18 @@ if(!isset($_SESSION['name'])){
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
       <title>会員情報</title>
+      <meta charset="UTF-8">
+      <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css" />
+      <link rel="stylesheet" href="../css/bootstrap-grid.css" type="text/css" />
 </head>
     <body>
+      <ol class="breadcrumb fixed-top">
+        <li class="breadcrumb-item"><?php  echo return_top();?></li>
+        <li class="breadcrumb-item active"><a href="<?php echo MY_HISTORY;?>">購入履歴</a></li>
+        <li class="breadcrumb-item"><a href="<?php echo MY_UPDATE;?>">会員情報更新</a></li>
+        <li class="breadcrumb-item"><a href="<?php echo MY_DELETE;?>">退会する</a></li>
+      </ol>
     <?php
        //UserIDを受け取る
         $UserID = $_SESSION['user_id'];
@@ -35,21 +43,32 @@ if(!isset($_SESSION['name'])){
           $_SESSION['address']=$hit['address'];
 
         ?>
-        <h2>会員情報</h2><br>
-        名前:<?php echo $hit['name'];?><br>
-        パスワード:<?php echo $hit['password'];?><br>
-        メールアドレス:<?php echo $hit['mail'];?><br>
-        住所:<?php echo $hit['address'];?><br>
+        <h4>会員情報</h4>
+        <table class="table table-hover table-bordered">
+        <tr class="table-primary">
+        <thead>
+        <td>名前</td>
+        <td>パスワード</td>
+        <td>メールアドレス</td>
+        <td>住所</td>
+        <td>総購入金額</td>
+        </thead>
+        </tr>
+        <tbody>
+        <tr class="table-light">
+        <td><?php echo $hit['name'];?></td>
+        <td><?php echo $hit['password'];?></td>
+        <td><?php echo $hit['mail'];?></td>
+        <td><?php echo $hit['address'];?></td>
         <!--セッションに総購入金額を記録させる-->
         <?php $_SESSION['mydata_total']=$hit['total'];?>
-        総購入金額:<?php echo $hit['total'];?><br>
+        <td><?php echo $hit['total'];?>円</td>
+        </tr>
+      </tbody>
+      </table>
         <?php
         }}else{
             echo 'データの挿入に失敗しました。次記のエラーにより処理を中断します:'.$result;
         }?>
-        <a href="<?php echo MY_HISTORY;?>">購入履歴</a>
-        <a href="<?php echo MY_UPDATE;?>">会員情報更新</a>
-        <a href="<?php echo MY_DELETE;?>">退会する</a>
-     <?php  echo return_top();?>
     </body>
 </html>

@@ -10,14 +10,6 @@ if(!isset($_SESSION['name'])){
   exit;
 }
 
-//もし何も購入していなかったら（ログインした後、商品を検索せずにここへきた場合）トップページへ
-if(!isset($_SESSION['selects'])){
-  echo "カートには何も入っていません。".'<br>';
-  echo return_top();
-  exit;
-}
-
-
 //商品を削除する
 //削除のボタンが押されたら
 if(isset($_GET['keyword'])){
@@ -36,8 +28,22 @@ if(isset($_GET['keyword'])){
   <head>
     <title>かごゆめ</title>
     <meta http-equiv="content-type" charset="utf-8">
+    <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../css/bootstrap-grid.css" type="text/css" />
   </head>
   <body>
+    <ol class="breadcrumb fixed-top">
+      <li class="breadcrumb-item active"><?php echo return_top();?></li>
+      <li class="breadcrumb-item active"><?php  echo return_login();?></li>
+    </ol>
+
+    <?php //もし何も購入していなかったら（ログインした後、商品を検索せずにここへきた場合）トップページへ
+    if(!isset($_SESSION['selects'])){
+      echo "カートには何も入っていません。".'<br>';
+      echo return_top();
+      exit;
+    }?>
+
     <?php
     //合計金額の初期値
     $sum =0;
@@ -50,32 +56,40 @@ if(isset($_GET['keyword'])){
     //商品のIDコードをurlにエンコードして渡す
     $url2 ="item.php?data=".urlencode($product_id);
        ?>
-    <div>
-      <p><ul>
-          <a href="<?=$url2?>"><img src="<?php echo $hit['image'] ; ?>" /></a><br>
-          名前：<?php echo $hit['name']; ?></a><br>
-          金額：<?php echo $hit['price'];
-          //キャンセル用
-          $item_code=$hit['code'];?>円
-
-          <!--合計金額-->
-          <?php $sum += $hit['price'];?>
-        </p></ul>
+    <div align="center">
+    <div class="w-50 p-3">
+    <div class="col-12 col-md-6">
+    <div class="card text-center mb-3">
+    <div align="center">
+    <a href="<?=$url2?>"><img style="margin:20px;" src="<?php echo $hit['image'] ; ?>" /></a></div>
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item">名前：<?php echo $hit['name']; ?></a></li>
+    <li class="list-group-item">金額：<?php echo $hit['price'];?>円</li>
+    <!--キャンセル用-->
+    <?php $item_code=$hit['code'];?>
+    <!--合計金額-->
+    <?php $sum += $hit['price'];?>
+    </ul>
+    </div>
+    </div>
+    </div>
     </div>
     <form action="<?php echo CART;?>" method="GET">
-      <!--商品コードを渡す-->
+    <!--商品コードを渡す-->
     <input type="hidden" name="keyword" value="<?php echo $item_code ?>"/>
-    <input type="submit" name="btnSubmit" value="キャンセルする">
+    <button type="submit" class="btn btn-warning" name="btnSubmit" value="キャンセルする">キャンセルする</button>
     </form>
+    <br>
     <?php } ?>
-    <p>合計金額:<?php echo $sum;?>円</p>
+    <h5>合計金額:<?php echo $sum;?>円</h5><br>
     <!--カートに商品情報が入っていたら、購入ボタンを押せる-->
     <?php if(!empty($_SESSION['selects'])){?>
       <form action="<?php echo BUY_CONFIRM; ?>" method="GET">
         <!--検索キーワードをエンコードして渡す-->
       <input type="hidden" name="buy_check" value="OK"/>
-      <input type="submit" name="btnSubmit" value="購入手続きに進む">
+      <button type="submit" class="btn btn-primary" name="btnSubmit" value="購入手続きに進む">購入手続きに進む</button>
       </form>
-    <?php } echo return_top();?>
+      <br><br>
+    <?php }?>
   </body>
 </html>

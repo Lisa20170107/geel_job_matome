@@ -6,8 +6,15 @@
 <head>
 <meta charset="UTF-8">
       <title>会員情報更新</title>
+      <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css" />
+      <link rel="stylesheet" href="../css/bootstrap-grid.css" type="text/css" />
 </head>
 <body>
+  <ol class="breadcrumb fixed-top">
+    <li class="breadcrumb-item"><?php  echo return_top();?></li>
+    <li class="breadcrumb-item"><a href="<?php echo MY_DATA; ?>">会員情報</a></li>
+    <li class="breadcrumb-item"><a href="<?php echo CART; ?>">カートの中身を確認する</a></li>
+  </ol>
     <?php session_start();//再入力時用
 
     // 初期値設定
@@ -42,29 +49,31 @@
 
 
     ?>
-    <h2>会員情報更新</h2>
+    <legend>会員情報更新</legend>
+    <div class="w-25 p-3 mx-auto"><div class="form-group">
     <form action="<?php echo MY_UPDATE_RESULT ?>" method="POST">
 
-      名前:
-      <input type="text" name="name" value=<?php echo $text; ?>>
-      <br><br>
+      <label for="exampleInputEmail1">名前</label>
+      <input type="text" name="name" class="form-control" value=<?php echo $text; ?>>
+      <br>
 
 
-      パスワード:
-      <input type="text" name="password" value=<?php echo $password; ?>>
-      <br><br>
+      <label for="exampleInputEmail1">パスワード</label>
+      <input type="text" name="password" class="form-control" value=<?php echo $password; ?>>
+      <br>
 
-      メールアドレス:
-      <input type="text" name="mail" value=<?php echo $mail; ?>>
-      <br><br>
+      <label for="exampleInputEmail1">メールアドレス</label>
+      <input type="text" name="mail" class="form-control" value=<?php echo $mail; ?>>
+      <br>
 
-      住所:<br>
-      <textarea name="address" rows=10 cols=50 style="resize:none" wrap="hard"><?php echo $address; ?></textarea>
-      <br><br>
+      <label for="exampleInputEmail1">住所</label>
+      <textarea name="address" rows=10 cols=50 style="resize:none" wrap="hard" class="form-control"><?php echo $address; ?></textarea>
+      <br>
      <p>以上の内容で更新しますか?</p>
         <input type="hidden" name="mode"  value="RESULT">
-        <input type="submit" name="btnSubmit" value="更新する">
-    </form><br>
-     <?php  echo return_top();?>
+        <button type="submit" class="btn btn-primary" name="btnSubmit" value="更新する">更新する</button>
+    </form>
+  </div>
+</div><br>
 </body>
 </html>

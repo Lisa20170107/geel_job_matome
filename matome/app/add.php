@@ -47,30 +47,41 @@ $_SESSION['selects'] = $products;
    <head>
      <title>かごゆめ</title>
      <meta http-equiv="content-type" charset="utf-8">
+     <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css" />
+     <link rel="stylesheet" href="../css/bootstrap-grid.css" type="text/css" />
    </head>
    <body>
+     <ol class="breadcrumb fixed-top">
+       <li class="breadcrumb-item active"><?php echo return_top();?></li>
+       <li class="breadcrumb-item active"><?php  echo return_login();?></li>
+       <li class="breadcrumb-item active"><a href="<?php echo CART ?>">カートの中身を確認する</a></li>
+     </ol>
      <p><?php echo login_hello(); ?></p>
      <!--繰り返し文で値を取り出す。10件のみ表示させる-->
      <?php
      foreach ($hits as $hit) {
  ?>
-     <div>
-       <p>
-         <?php
-         ?>
-           <img src="<?php echo h($hit->Image->Medium); ?>" /><br>
-           <?php echo h($hit->Name); ?><br>
-           <li>評価<br><?php echo h($hit->Review->Rate);?></li>
-           <li>金額：<?php echo h($hit->Price); ?>円</li>
-           <li>商品説明<br><?php echo $hit->Description; ?></li>
+<div align="center">
+ <div class="col-12 col-md-6">
+  <div class="card text-center mb-3">
+    <div align="center" >
+         <img style="margin-top:20px;" src="<?php echo h($hit->Image->Medium); ?>" /><br>
+         </div>
+         <div class="card-body">
+         <p class="card-text">
+         <?php echo h($hit->Name); ?><br></p>
+         <ul class="list-group list-group-flush">
+         <li class="list-group-item">評価<br><?php echo h($hit->Review->Rate);?></li>
+         <li class="list-group-item">金額：<?php echo h($hit->Price); ?>円</li>
+         <li class="list-group-item">商品説明<br><?php echo $hit->Description; ?></li>
            </form>
-          以上の商品をカートにいれました。
-         </p>
+         </ul>
+      </div>
      </div>
+   </div>
+</div>
+        <p>以上の商品をカートにいれました。</p>
      <?php } ?>
-     <?php  echo return_top();?>
-     <?php  echo return_login();?>
-     <a href="<?php echo CART ?>">カートの中身を確認する</a>
-
+     <a href="<?php echo $_SESSION['before_url_cart'];?>">検索結果に戻る</a>
    </body>
  </html>

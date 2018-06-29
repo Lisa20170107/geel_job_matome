@@ -16,8 +16,14 @@ if(!isset($_SESSION['name'])){
 <head>
 <meta charset="UTF-8">
       <title>退会画面</title>
+      <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css" />
+      <link rel="stylesheet" href="../css/bootstrap-grid.css" type="text/css" />
 </head>
     <body>
+      <ol class="breadcrumb fixed-top">
+        <li class="breadcrumb-item"><a href="<?php echo REGISTRATION; ?>">新規登録</a></li>
+        <li class="breadcrumb-item active"><?php echo return_top();?></li>
+      </ol>
     <?php
         //UserIDを受け取る
         $UserID=$_SESSION['user_id'];
@@ -37,7 +43,6 @@ if(!isset($_SESSION['name'])){
         }else{
             echo 'データの挿入に失敗しました。次記のエラーにより処理を中断します:'.$result;
         }
-    echo return_top();
     ?>
     </body>
 </html>

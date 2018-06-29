@@ -14,43 +14,56 @@ session_start();
   <head>
     <title>かごゆめ</title>
     <meta http-equiv="content-type" charset="utf-8">
+    <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../css/bootstrap-grid.css" type="text/css" />
   </head>
   <body>
-    <h1>かごゆめ</h1>
-    <p>
-      ショッピングサイトを使っている時、こんな経験ありませんか？<br>
-     「あれいいな」<br>
-     「これいいな」<br>
-     「20%オフセールだって！？買わなきゃ！」...<br><br>
+    <ol class="breadcrumb fixed-top">
+      <li class="breadcrumb-item"><a href="<?php echo REGISTRATION; ?>">新規登録</a></li>
+      <li class="breadcrumb-item active"><?php  echo return_login();?></li>
+      <li class="breadcrumb-item"><a href="<?php echo MY_DATA; ?>">会員情報</a></li>
+      <li class="breadcrumb-item"><a href="<?php echo CART; ?>">カートの中身を確認する</a></li>
+    </ol>
+    <div class="jumbotron" style="background:url(../img/4.jpg); background-size:cover;">
+     <div class="container">
+        <h1><p class="text-white">KAGOYUME</p></h1>
+        <p class="text-white">ショッピングデモサイト</p>
 
-     そしていざ『買い物かご』を開いたとき、その合計金額に愕然とします。<br>
-     「こんなに買ってたのか・・・しょうがない。いくつか減らそう・・・」<br><br>
-
-     仕方がありません。無駄遣いは厳禁です。<br>
-     でも、一度買うと決めたものを諦めるなんて、ストレスじゃあありませんか？<br>
-     できればお金の事なんか考えずに好きなだけ買い物がしたい・・・。<br><br>
-
-     このサービスは、そんなフラストレーションを解消するために生まれた、<br><br>
-
-     『金銭取引が絶対に発生しない』<br>
-     『いくらでも、どんなものでも購入できる(気分になれる)』<br>
-     『ECサイト』<br><br>
-
-     です。<br>
-    </p>
-    <p><?php echo login_hello(); ?></p>
-    <h2>商品検索</h2>
-    <p>
-      <form action="<?php echo SEARCH ?>" method="GET">
+        <!--ここからフォーム-->
+        <div class="input-group">
+        <div class="w-auto p-3 mx-auto">
+        <form class="form-inline my-2 my-lg-0" action="<?php echo SEARCH ?>" method="GET">
+        <!-- ソート-->
+        <div class="form-row">
+        <div class="col">
+       <select select class="form-control" name="sort">
+       <?php foreach ($sortOrder as $key => $value) { ?>
+       <option value="<?php echo h($key); ?>"><?php echo h($value);?></option>
+       <?php } ?>
+       </select>
+     </div>
+       <!-- カテゴリー選択-->
+       <div class="col">
+       <select select class="form-control" name="category_id">
+       <?php foreach ($categories as $id => $name) { ?>
+       <option value="<?php echo h($id); ?>"><?php echo h($name);?></option>
+       <?php } ?>
+       </select></div>
         <!--検索キーワードをエンコードして渡す-->
-      <input type="text" name="keyword" value="<?php echo h($keyword); ?>"/>
-      <input type="submit" name="btnSubmit" value="yahooショッピングで検索する">
-      </form>
-      <br><br>
-    </p>
-    <a href="<?php echo REGISTRATION; ?>">新規登録</a>
-    <?php  echo return_login();?>
-    <a href="<?php echo MY_DATA; ?>">会員情報</a>
-    <a href="<?php echo CART; ?>">カートの中身を確認する</a>
-  </body>
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" name="keyword" value="<?php echo h($keyword); ?>">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit" name="btnSubmit" value="yahooショッピングで検索する">yahooショッピングで検索する</button>
+       </form>
+       </div>
+       </div>
+      </div>
+    </div>
+  </div>
+
+    <p><?php echo login_hello(); ?></p><br>
+    <div class="alert alert-dismissible alert-info">
+  『金銭取引が絶対に発生しない』
+  『いくらでも、どんなものでも購入できる(気分になれる)』
+  『ECサイト』
+</div>
+</body>
 </html>

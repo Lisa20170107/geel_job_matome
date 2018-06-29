@@ -7,8 +7,14 @@
 <head>
 <meta charset="UTF-8">
       <title>登録結果画面</title>
+      <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css" />
+      <link rel="stylesheet" href="../css/bootstrap-grid.css" type="text/css" />
 </head>
     <body>
+      <ol class="breadcrumb fixed-top">
+        <li class="breadcrumb-item"><?php echo return_top();?></li>
+        <li class="breadcrumb-item"><a href="<?php echo CART; ?>">カートの中身を確認する</a></li>
+      </ol>
     <?php
     if(!$_POST['mode']=="RESULT"){
         echo 'アクセスルートが不正です。もう一度トップページからやり直してください<br>';
@@ -26,12 +32,12 @@
         //エラーが発生しなければ表示を行う
         if(!isset($result)){
         ?>
-        <h1>登録結果画面</h1><br>
-        名前:<?php echo $name;?><br>
-        パスワード:<?php echo $password;?><br>
-        メールアドレス:<?php echo $mail;?><br>
-        住所:<?php echo $address;?><br><br>
-        以上の内容で登録しました。<br>
+        <legend>登録結果画面</legend><br>
+        <p>名前:<?php echo $name;?></p><br>
+        <p>パスワード:<?php echo $password;?></p><br>
+        <p>メールアドレス:<?php echo $mail;?></p><br>
+        <p>住所:<?php echo $address;?></p><br><br>
+        <p>以上の内容で登録しました。</p><br>
         <!--UserIDをセッションに記録させる（購入ページで使用するため）-->
         <?php
         //フォームの値をlogin_profiles();に渡し、レコードを検索する。フォームの値と一致したレコードを配列で取得する。
@@ -46,7 +52,6 @@
             echo 'データの挿入に失敗しました。次記のエラーにより処理を中断します:'.$result;
         }
     }
-    echo return_top();
     ?>
     </body>
 </html>

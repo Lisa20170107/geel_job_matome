@@ -6,8 +6,14 @@
 <head>
 <meta charset="UTF-8">
       <title>会員登録</title>
+      <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css" />
+      <link rel="stylesheet" href="../css/bootstrap-grid.css" type="text/css" />
 </head>
 <body>
+  <ol class="breadcrumb fixed-top">
+    <li class="breadcrumb-item"><?php echo return_top();?></li>
+    <li class="breadcrumb-item"><a href="<?php echo CART; ?>">カートの中身を確認する</a></li>
+  </ol>
     <?php session_start();//再入力時用
 
     // 初期値設定
@@ -42,29 +48,31 @@
 
 
     ?>
-    <h2>会員登録</h2>
+    <legend>会員登録</legend>
+    <div class="w-25 p-3 mx-auto"><div class="form-group">
     <form action="<?php echo REGISTRATION_CONFIRM ?>" method="POST">
 
-      名前:
-      <input type="text" name="name" value=<?php echo $text ?>>
-      <br><br>
+      <label for="exampleInputEmail1">名前</label>
+      <input type="text" name="name" class="form-control" value=<?php echo $text ?>>
+      <br>
 
 
-      パスワード:
-      <input type="text" name="password" value=<?php echo $password ?>>
+      <label for="exampleInputEmail1">パスワード</label>
+      <input type="text" name="password" class="form-control" value=<?php echo $password ?>>
       <br><br>
 
-      メールアドレス:
-      <input type="text" name="mail" value=<?php echo $mail ?>>
+      <label for="exampleInputEmail1">メールアドレス</label>
+      <input type="text" name="mail" class="form-control" value=<?php echo $mail ?>>
       <br><br>
 
-      住所:<br>
-      <textarea name="address" rows=10 cols=50 style="resize:none" wrap="hard"><?php echo $address ?></textarea>
-      <br><br>
+      <label for="exampleInputEmail1">住所</label>
+      <textarea name="address" rows=10 cols=50 style="resize:none" wrap="hard" class="form-control"><?php echo $address ?></textarea>
+      <br>
 
       <input type="hidden" name="mode"  value="CONFIRM">
-      <input type="submit" name="btnSubmit" value="確認画面へ">
-    </form><br>
-    <?php echo return_top();?>
+      <button type="submit" class="btn btn-primary" name="btnSubmit" value="確認画面へ">確認画面へ</button>
+    </form>
+  　</div>
+    </div>
 </body>
 </html>

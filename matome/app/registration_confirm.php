@@ -18,8 +18,14 @@ $confirm_values = array(
 <head>
 <meta charset="UTF-8">
       <title>登録確認画面</title>
+      <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css" />
+      <link rel="stylesheet" href="../css/bootstrap-grid.css" type="text/css" />
 </head>
   <body>
+    <ol class="breadcrumb fixed-top">
+      <li class="breadcrumb-item"><?php echo return_top();?></li>
+      <li class="breadcrumb-item"><a href="<?php echo CART; ?>">カートの中身を確認する</a></li>
+    </ol>
     <?php
     //入力画面から「確認画面へ」ボタンを押した場合のみ処理を行う
     if(!$_POST['mode']=="CONFIRM"){
@@ -29,18 +35,19 @@ $confirm_values = array(
         //1つでも未入力項目があったら表示しない
         if(!in_array(null,$confirm_values, true)){
             ?>
-            <h1>登録確認画面</h1><br>
-            名前:<?php echo $confirm_values['name'];?><br>
-            パスワード:<?php echo $confirm_values['password'];?><br>
-            メールアドレス:<?php echo $confirm_values['mail'];?><br>
-            住所:<?php echo $confirm_values['address'];?><br><br>
+            <legend>登録確認画面</legend><br>
+            <p>名前：<?php echo $confirm_values['name'];?></p><br>
+            <p>パスワード：<?php echo $confirm_values['password'];?></p><br>
+            <p>メールアドレス：<?php echo $confirm_values['mail'];?></p><br>
+            <p>住所：<?php echo $confirm_values['address'];?></p><br><br>
 
-            上記の内容で登録します。よろしいですか？
+            <p>上記の内容で登録します。よろしいですか？</p>
 
             <form action="<?php echo REGISTRATION_RESULT ?>" method="POST">
                 <input type="hidden" name="mode" value="RESULT" >
-                <input type="submit" name="yes" value="はい">
+                <button type="submit" class="btn btn-primary" name="yes" value="はい">はい</button>
             </form>
+            <br>
             <?php
         }else {
             ?>
@@ -70,11 +77,10 @@ $confirm_values = array(
         ?>
         <form action="<?php echo REGISTRATION ?>" method="POST">
             <input type="hidden" name="mode" value="REINPUT" >
-            <input type="submit" name="no" value="登録画面に戻る">
+            <button type="submit" class="btn btn-warning" name="no" value="登録画面に戻る">登録画面に戻る</button>
         </form>
         <?php
     }
-    echo return_top();
     ?>
 </body>
 </html>

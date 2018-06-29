@@ -55,15 +55,22 @@ else {
    <head>
      <title>ログインサンプル</title>
      <meta http-equiv="content-type" charset="utf-8">
+     <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css" />
+     <link rel="stylesheet" href="../css/bootstrap-grid.css" type="text/css" />
    </head>
    <body>
-    <p><font size ="3px" color="#008080">ログイン</font></p>
-      <form action="./login.php" method="post">
-       <!-- formタグで括られた入力項目はこれら -->
-        <p>名前：<input type="text" name="name"></p>
-        <p>パスワード：<input type="text" name="password"></p>
-        <input type="submit" name='login' value="ログイン">
-      </form>
+   <legend>Login</legend>
+   <div class="w-25 p-3 mx-auto"><div class="form-group">
+   <form action="./login.php" method="post">
+      <label for="exampleInputEmail1">name</label>
+      <input type="text" name="name" class="form-control" placeholder="Enter name"><br>
+      <label for="exampleInputEmail1">password</label>
+      <input type="text" name="password" class="form-control" placeholder="Enter password">
+      <br>
+      <button type="submit" class="btn btn-primary" name='login' value="ログイン">ログイン</button>
+   </form>
+    </div>
+    </div>
     <?php }?>
     <a href="<?php echo REGISTRATION; ?>">新規登録</a>
     <?php echo return_top();?>
